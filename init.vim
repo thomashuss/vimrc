@@ -33,8 +33,19 @@ if !has('gui_running')
 	hi Normal guibg=NONE ctermbg=NONE   "transparent bg in terminal
 endif
 
+set splitbelow
+set splitright
+
 " easy window navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
+" Python PEP 8
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
