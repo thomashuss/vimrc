@@ -1,3 +1,6 @@
 [submodule "pack/plugins/start/vimtex"]
 	path = pack/plugins/start/vimtex
 	url = https://github.com/lervag/vimtex.git
+[submodule "pack/plugins/opt/YouCompleteMe"]
+	path = pack/plugins/opt/YouCompleteMe
+	url = https://github.com/ycm-core/YouCompleteMe.git
