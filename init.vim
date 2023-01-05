@@ -42,10 +42,11 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-" Python PEP 8
+" Python
 au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ | set softtabstop=4
-    \ | set shiftwidth=4
-    \ | set textwidth=79
-    \ | set expandtab
+	\ execute 'packadd YouCompleteMe'
+	\ | set tabstop=4
+	\ | set softtabstop=4
+	\ | set shiftwidth=4
+	\ | set textwidth=79
+	\ | set expandtab
