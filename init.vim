@@ -50,3 +50,6 @@ au BufNewFile,BufRead *.py
 	\ | set shiftwidth=4
 	\ | set textwidth=79
 	\ | set expandtab
+
+" commands
+command Wc w !wc -w
