@@ -1,7 +1,7 @@
 set number relativenumber
                   " hybrid line numbering
 set hidden        " hide buffers instead of closing theme
-set nowrap        " don't wrap lines
+"set nowrap        " don't wrap lines
 set tabstop=4     " a tab is four spaces
 set backspace=indent,eol,start
                   " allow backspacing over everything in insert mode
@@ -31,6 +31,14 @@ colorscheme desert
 autocmd InsertEnter,InsertLeave * set cul!  "highlight line when in insert mode
 if !has('gui_running')
 	hi Normal guibg=NONE ctermbg=NONE   "transparent bg in terminal
+endif
+if &term =~ "xterm\\|rxvt"
+	" use a | cursor in insert mode
+	let &t_SI = "\<Esc>[5 q"
+
+	" use a rectangle cursor otherwise
+	let &t_EI = "\<Esc>[1 q"
+	autocmd VimEnter * silent !echo -ne "\e[1 q"
 endif
 
 set splitbelow
