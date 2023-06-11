@@ -34,11 +34,11 @@ if !has('gui_running')
 endif
 if &term =~ "xterm\\|rxvt"
 	" use a | cursor in insert mode
-	let &t_SI = "\<Esc>[5 q"
+	let &t_SI = "\<Esc>[6 q"
 
 	" use a rectangle cursor otherwise
-	let &t_EI = "\<Esc>[1 q"
-	autocmd VimEnter * silent !echo -ne "\e[1 q"
+	let &t_EI = "\<Esc>[2 q"
+	autocmd VimEnter * silent !echo -ne "\e[2 q"
 endif
 
 set splitbelow
