@@ -38,7 +38,7 @@ if &term =~ "xterm\\|rxvt"
 
 	" use a rectangle cursor otherwise
 	let &t_EI = "\<Esc>[2 q"
-	autocmd VimEnter * silent !echo -ne "\e[2 q"
+	"autocmd VimEnter * silent !echo -ne "\e[2 q"
 endif
 
 set splitbelow
