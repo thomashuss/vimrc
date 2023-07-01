@@ -24,6 +24,9 @@ set listchars=tab:\ \ ,trail:.,extends:#,nbsp:.
 
 filetype plugin indent on
 
+set timeoutlen=1000
+set ttimeoutlen=5
+
 " appearance
 set title
 syntax on
