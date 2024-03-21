@@ -61,4 +61,18 @@ au BufNewFile,BufRead *.py
 	\ | set expandtab
 
 " commands
-command Wc w !wc -w
+function RichPaste()
+	let extension = expand('%:e')
+	let cmd = "xclip -o -sel c -t text/html"
+	if extension == "md"
+		let cmd = cmd . " | pandoc -f html -t markdown"
+		let out = substitute(substitute(system(cmd), "\\\\'", "'", "g"), "\\\\\"", "\"", "g")
+	elseif extension == "tex"
+		let cmd = cmd . " | pandoc -f html -t latex"
+		let out = system(cmd)
+	else
+		let out = system(cmd)
+	endif
+	put =out
+endfunction
+command Rp call RichPaste()
