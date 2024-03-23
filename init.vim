@@ -65,14 +65,34 @@ function RichPaste()
 	let extension = expand('%:e')
 	let cmd = "xclip -o -sel c -t text/html"
 	if extension == "md"
-		let cmd = cmd . " | pandoc -f html -t markdown"
-		let out = substitute(substitute(system(cmd), "\\\\'", "'", "g"), "\\\\\"", "\"", "g")
+		let cmd = cmd . " | pandoc -f html -t gfm-raw_html"
 	elseif extension == "tex"
-		let cmd = cmd . " | pandoc -f html -t latex"
-		let out = system(cmd)
-	else
-		let out = system(cmd)
+		let cmd = cmd . " | pandoc -f html+smart -t latex"
 	endif
+	let out = system(cmd)
 	put =out
 endfunction
 command Rp call RichPaste()
+function RichYankDocument(plain)
+	let extension = expand('%:e')
+	if extension == "tex"
+		let type = "latex"
+	else
+		let type = "markdown"
+	endif
+	let cmd = "silent w !pandoc -f " . type . " -t html | xclip -i -sel c"
+	if a:plain == 0
+		let cmd = cmd . " -t text/html"
+	endif
+	exe cmd
+endfunction
+command RY call RichYankDocument(0)
+command RYP call RichYankDocument(1)
+function RenderDocument(out_ext)
+	let in_file_name = expand('%:p')
+	let g:out_file_name = expand('%:p:r') . "." . a:out_ext
+	exe "!pandoc -s -V boxlinks=true -V geometry:margin=0.79in -o '" . g:out_file_name . "' '" . in_file_name . "' && echo Done."
+endfunction
+command! -nargs=1 R call RenderDocument(<f-args>)
+command Ro exe "silent !xdg-open '" . g:out_file_name . "' &"
+command Rpy let @+ = g:out_file_name
