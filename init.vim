@@ -94,5 +94,5 @@ function RenderDocument(out_ext)
 	exe "!pandoc -s -V boxlinks=true -V geometry:margin=0.79in -o '" . g:out_file_name . "' '" . in_file_name . "' && echo Done."
 endfunction
 command! -nargs=1 R call RenderDocument(<f-args>)
-command Ro exe "silent !xdg-open '" . g:out_file_name . "' &"
+command Ro let _ = system("xdg-open '" . g:out_file_name . "' &")
 command Rpy let @+ = g:out_file_name
