@@ -1,3 +1,4 @@
+set modeline
 set number relativenumber
                   " hybrid line numbering
 "set nowrap        " don't wrap lines
