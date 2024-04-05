@@ -92,7 +92,7 @@ command RYP call RichYankDocument(1)
 function RenderDocument(out_ext)
 	let in_file_name = expand('%:p')
 	let g:out_file_name = expand('%:p:r') . "." . a:out_ext
-	exe "!pandoc -s -V boxlinks=true -V geometry:margin=0.79in -o '" . g:out_file_name . "' '" . in_file_name . "' && echo Done."
+	exe "!pandoc -s -V colorlinks=true -V geometry:margin=0.79in -o '" . g:out_file_name . "' '" . in_file_name . "' && echo Done."
 endfunction
 command! -nargs=1 R call RenderDocument(<f-args>)
 command Ro let _ = system("xdg-open '" . g:out_file_name . "' &")
