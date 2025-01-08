@@ -61,6 +61,9 @@ au BufNewFile,BufRead *.py
 	\ | set textwidth=79
 	\ | set expandtab
 
+"au BufNewFile,BufRead *.go
+"	\ execute 'packadd YouCompleteMe'
+
 " commands
 function RichPaste()
 	let extension = expand('%:e')
