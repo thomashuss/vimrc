@@ -105,3 +105,15 @@ endfunction
 command! -nargs=1 R call RenderDocument(<f-args>)
 command Ro let _ = system("xdg-open '" . g:out_file_name . "' &")
 command Rpy let @+ = g:out_file_name
+
+function FromMarkdown()
+	let extension = expand('%:e')
+	if extension == "tex"
+		let type = "latex"
+	else
+		let type = "html"
+	endif
+    exe "silent '<,'>!awk 'NR==1{if(match($0,\"^[ \\n\\t]+\",a)>0){r=\"^[ \\n\\t]{\"length(a[0])\"}\"}}r{sub(r,\"\")}{print}' | pandoc -f markdown -t " . type
+endfunction
+
+command -range M call FromMarkdown()
