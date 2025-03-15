@@ -76,7 +76,9 @@ function RichPaste()
 	let out = system(cmd)
 	put =out
 endfunction
+" paste rich text as tex/md/html
 command Rp call RichPaste()
+
 function RichYankDocument(plain)
 	let extension = expand('%:e')
 	if extension == "tex"
@@ -90,8 +92,11 @@ function RichYankDocument(plain)
 	endif
 	exe cmd
 endfunction
+" yank entire document to graphical clipboard as rich text
 command RY call RichYankDocument(0)
+" yank entire document to graphical clipboard as html
 command RYP call RichYankDocument(1)
+
 function RenderDocument(out_ext)
 	let in_file_name = expand('%:p')
 	let extension = expand('%:e')
@@ -102,8 +107,11 @@ function RenderDocument(out_ext)
 		exe "!pandoc -s -V colorlinks=true -V geometry:margin=0.79in -o '" . g:out_file_name . "' '" . in_file_name . "' && echo Done."
 	endif
 endfunction
+" render document
 command! -nargs=1 R call RenderDocument(<f-args>)
+" open rendered document
 command Ro let _ = system("xdg-open '" . g:out_file_name . "' &")
+" yank path of rendered document to graphical clipboard
 command Rpy let @+ = g:out_file_name
 
 function FromMarkdown()
@@ -115,5 +123,5 @@ function FromMarkdown()
 	endif
     exe "silent '<,'>!awk 'NR==1{if(match($0,\"^[ \\n\\t]+\",a)>0){r=\"^[ \\n\\t]{\"length(a[0])\"}\"}}r{sub(r,\"\")}{print}' | pandoc -f markdown -t " . type
 endfunction
-
+" convert a section of document from markdown to tex/html
 command -range M call FromMarkdown()
